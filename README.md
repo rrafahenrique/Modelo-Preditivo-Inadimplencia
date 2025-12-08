@@ -29,11 +29,11 @@ Os seguintes itens são esperados:
 ## Plano de Ação
 A estratégia utilizada aqui foi dividir o desafio em **três arquivos .ipynb**, cada um abordando uma etapa:
 1. **PARTE I**: Manipulação do dataset para limpar dados vazios e prepará-lo para a análise exploratória. O precesso foi feito da seguinte forma:
-- Contabilização de dados ausentes;
-- Busca por estratégias de preencher os dados faltantes:
-    - Mediana;
-    - Média;
-    - Groupby.
+    - Contabilização de dados ausentes;
+    - Busca por estratégias de preencher os dados faltantes:
+        - Mediana;
+        - Média;
+        - Groupby.
 
 > O código-fonte está disponível em: [DESAFIO - PARTE I.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/DESAFIO%20-%20PARTE%20I.ipynb)
      
