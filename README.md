@@ -54,7 +54,9 @@ A estratégia utilizada aqui foi dividir o desafio em **três arquivos .ipynb**,
     - KNeighborsClassifier
     - LightGBM
 
-E na fase de avalição do modelo foi usado **SHAP**.
+Além da construção do modelo, foi feita também uma análise do **grupo de risco de inadimplência**, para mostrar como o resultado classifica os diferentes tipos de empresas/indivíduos em relação ao fato de honrar ou não seus compromissos financeiros no prazo. Algo muito semelhante ao *Score da Serasa*.
+
+Para entender melhor quais as características do modelo que mais influenciaram no resultado final, foi usado o **SHAP**, para explicar como cada feature atua na previsão e análise do conjunto de dados e o problema em questão.
 
 > O código-fonte está disponível em: [DESAFIO - PARTE III.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/DESAFIO%20-%20PARTE%20III.ipynb)
 
