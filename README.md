@@ -1,4 +1,4 @@
-![Badge de Concluido](https://img.shields.io/badge/status-Em_Andamento-orange?style=for-the-badge)
+![Badge de Concluido](https://img.shields.io/badge/status-Conluído-green?style=for-the-badge)
 
 # Desafio - Modelo Preditivo
 
