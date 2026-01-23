@@ -84,7 +84,7 @@ def train_cv_repeat(
     models: Dict[str, object] = {
         "Regressão Logística": LogisticRegression(max_iter=1000),
         "Floresta Randômica": RandomForestClassifier(n_estimators=300, random_state=random_state),
-        "KNN": KNeighborsClassifier(n_neighbors=5),
+        "K-Vizinhos Mais Próximos (KNN)": KNeighborsClassifier(n_neighbors=5),
         "Árvore de Decisão": DecisionTreeClassifier(random_state=random_state),
         "LightGBM": LGBMClassifier(n_estimators=300,learning_rate=0.05,random_state=random_state,verbosity=-1)
     }
@@ -141,12 +141,13 @@ def validacao_cruzada(X, y, oversampling = False, undersampling = False, n_split
     models: Dict[str, object] = {
         "Regressão Logística": LogisticRegression(max_iter=1000),
         "Floresta Randômica": RandomForestClassifier(n_estimators=300,random_state=random_state),
-        "KNN": KNeighborsClassifier(n_neighbors=5),
+        "K-Vizinhos Mais Próximos (KNN)": KNeighborsClassifier(n_neighbors=5),
         "Árvore de Decisão": DecisionTreeClassifier(random_state=random_state),
         "LightGBM": LGBMClassifier(n_estimators=300, learning_rate=0.05, random_state=random_state, verbosity=-1)
     }
 
-    results = []
+    results = []         #Guardar as métricas finais 
+    trained_models = {}  #Guardar os modelos finais
 
     for name, model in models.items():
         metrics = {
@@ -185,6 +186,18 @@ def validacao_cruzada(X, y, oversampling = False, undersampling = False, n_split
             metrics["recall"].append(recall_score(y_val, y_pred))
             metrics["f1"].append(f1_score(y_val, y_pred))
 
+        #Refit final com todos os dados
+        X_final, y_final = X.copy(), y.copy()
+
+        if oversampling:
+            X_final, y_final = SMOTE(random_state=random_state).fit_resample(X_final, y_final)
+
+        if undersampling:
+            X_final, y_final = TomekLinks().fit_resample(X_final, y_final)
+
+        model.fit(X_final, y_final)
+        trained_models[name] = model  #salva o modelo treinado
+
         results.append({
             "Modelo": name,
             "ROC-AUC": np.mean(metrics["roc_auc"]),
@@ -194,65 +207,7 @@ def validacao_cruzada(X, y, oversampling = False, undersampling = False, n_split
             "F1-Score": np.mean(metrics["f1"])
         })
 
-    return pd.DataFrame(results).round(3)
+    return pd.DataFrame(results).round(3), trained_models
 #--------------------------------------------------------------------------------
-def random_search_rf_tomek(
-    X,
-    y,
-    n_iter: int = 20,
-    scoring: str = "recall",
-    n_splits: int = 5,
-    random_state: int = 42,
-    n_jobs: int = -1,
-    verbose: int = 0
-):
-    """
-    Executa RandomizedSearchCV com RandomForest + TomekLinks
-    para dados desbalanceados.
 
-    Retorna:
-    - objeto RandomizedSearchCV treinado
-    """
-
-    # Pipeline
-    pipeline = Pipeline(steps=[
-        ("tomek", TomekLinks()),
-        ("rf", RandomForestClassifier(
-            class_weight="balanced",
-            random_state=random_state,
-            n_jobs=n_jobs
-        ))
-    ])
-
-    # Espaço de busca
-    param_grid = {
-        "rf__n_estimators": [100, 200, 300],
-        "rf__max_depth": [5, 10, 20],
-        "rf__min_samples_split": [2, 5],
-        "rf__min_samples_leaf": [2, 4]
-    }
-
-    # Cross-validation estratificada
-    cv = StratifiedKFold(
-        n_splits=n_splits,
-        shuffle=True,
-        random_state=random_state
-    )
-
-    # Randomized Search
-    random_search = RandomizedSearchCV(
-        estimator=pipeline,
-        param_distributions=param_grid,
-        n_iter=n_iter,
-        scoring=scoring,
-        cv=cv,
-        random_state=random_state,
-        n_jobs=n_jobs,
-        verbose=verbose
-    )
-
-    # Treinamento
-    random_search.fit(X, y)
-
-    return random_search
 
