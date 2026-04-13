@@ -5,10 +5,9 @@
 Imagine que você trabalhe em uma empresa de consultoria especializada em soluções de dados e inteligência de crédito. Atuando com grandes instituições financeiras, desenvolvendo modelos preditivos, sistema de apoio à decisão e estratégias baseadas em dados. Você foi alocado em um projeto que envolve o acompanhamento de transações financeiras realizadas por clientes ao longo do tempo.
 
 ## Objetivo Principal
-Desenvolver um **modelo preditivo** capaz de estimar a probabilidade de inadimplência de cobranças mensais feitas aos clientes. 
+Desenvolver um **modelo preditivo** capaz de estimar a probabilidade de inadimplência de cobranças mensais feitas aos clientes. Neste projeto a **inadimplência** é definida da seguinte forma:
 
-> [!attention] A **inadimplência** é definida da seguinte forma:
-> Um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
+> ⚠️ Um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
 
 No final deste projeto os seguintes itens são esperados, um arquivo `.csv` chamado `submissao_case.csv`, contendo exatamente as seguintes colunas:
 - `ID_CLIENTE`
