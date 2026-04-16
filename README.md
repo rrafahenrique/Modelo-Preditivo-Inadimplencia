@@ -39,7 +39,7 @@ A estratégia utilizada neste estudo de cado foi dividir o desafio em **dois arq
     - Identificação de padrões, tendências e relações entre as variáveis;
     - Análise da variável target.
 
-> O código-fonte está disponível em: [PARTE I.ipynb]()
+> O código-fonte está disponível em: [PARTE I.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/PARTE%20I.ipynb)
 
 2. **PARTE II**: Desenvolvimento e avaliação dos modelos de Machine Learning com foco na previsão da inadimplência. Nesta etapa foram realizadas: 
 - Engenharia de features a partir de variáveis temporais, com o tratamento e a extração de informações relevantes das colunas de data.  
@@ -50,7 +50,7 @@ A estratégia utilizada neste estudo de cado foi dividir o desafio em **dois arq
     - K-Nearest Neighbors (KNN);
     - LightGBM.
 
-> O código-fonte está disponível em: [PARTE II.ipynb]() 
+> O código-fonte está disponível em: [PARTE II.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/PARTE%20II.ipynb) 
 
 ## Resultados
 O ínicio dete estudo de caso se deu tratando os valores ausentes do dataset, sendo identificado que algumas features apresentavam dados faltantes.
