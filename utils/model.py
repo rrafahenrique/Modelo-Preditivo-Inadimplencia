@@ -16,13 +16,7 @@ from sklearn.model_selection import RepeatedStratifiedKFold, KFold, StratifiedKF
 
 from imblearn.pipeline import Pipeline
 
-def train_and_compare_models(
-    X_train: pd.DataFrame,
-    X_test: pd.DataFrame,
-    y_train: pd.Series,
-    y_test: pd.Series,
-    random_state: int = 42
-) -> pd.DataFrame:
+def train_and_compare_models(X_train, X_test, y_train, y_test, random_state = 42):
     """
     Treina e avalia múltiplos modelos de classificação binária,
     retornando as métricas de avaliação.
@@ -30,7 +24,7 @@ def train_and_compare_models(
 
     # Modelos
     models: Dict[str, object] = {
-        "Regressão Logística": LogisticRegression(random_state=42),
+        "Regressão Logística": LogisticRegression(random_state=random_state),
         "Floresta Randômica": RandomForestClassifier(random_state=random_state),
         "K-Vizinhos Mais Próximos (KNN)": KNeighborsClassifier(n_neighbors=5),
         "Árvore de Decisão": DecisionTreeClassifier(random_state=random_state),
@@ -62,13 +56,7 @@ def train_and_compare_models(
 
 #--------------------------------------------------------------------
 
-def train_cv_repeat(
-    X: pd.DataFrame,
-    y: pd.Series,
-    n_splits: int = 5,
-    n_repeats: int = 3,
-    random_state: int = 42
-) -> pd.DataFrame:
+def train_cv_repeat( X, y, n_splits = 5, n_repeats = 3, random_state = 42):
     """
     Treina e avalia múltiplos modelos de classificação binária
     usando RepeatedStratifiedKFold Cross-Validation.
