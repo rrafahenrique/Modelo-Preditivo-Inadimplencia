@@ -82,67 +82,6 @@ def df_summary_report(df):
     )
     return styled
 #----------------------------------------------------------------------------------------------------------------------
-def df_describe_report(df):
-    """
-    Gera um relatório estatístico descritivo formatado para variáveis numéricas.
-
-    A função calcula métricas como média, desvio padrão, mínimo,
-    quartis e máximo, exibindo o resultado em formato transposto
-    e com estilização visual utilizando pandas Styler.
-
-    Parâmetros
-    ----------
-    df : pandas.DataFrame
-        DataFrame contendo os dados a serem analisados.
-
-    Retorno
-        Tabela estilizada com estatísticas descritivas.
-    """
-
-    stats = pd.DataFrame({
-        "Média": df.mean(numeric_only=True),
-        "Desvio Padrão": df.std(numeric_only=True),
-        "Valor Mínimo": df.min(numeric_only=True),
-        "Primeiro Quartil - Q1": df.quantile(0.25, numeric_only=True),
-        "Segundo Quartil - Q2/Mediana": df.quantile(0.50, numeric_only=True),
-        "Terceiro Quartil - Q3": df.quantile(0.75, numeric_only=True),
-        "Valor Máximo": df.max(numeric_only=True)
-    }).T.reset_index().rename(columns={"index": "Estatística"})
-    
-    #colormaps
-    cmap_cor = sns.light_palette("#13678A", as_cmap=True)
-
-    styled = (stats.style 
-            .set_properties(**{ 
-            'background-color': "#101719", 
-            'color': '#E0E0E0', 
-            'border': '1px solid #2F3D40', 
-            'text-align': 'center' 
-            }) 
-    
-        #gradient para todas as colunas numéricas 
-        .background_gradient(cmap=cmap_cor) 
-        .format(precision=3) # formatação numérica 
-        .set_table_styles([{ 
-            'selector': 'th', 
-            'props': [ 
-                ('background-color', "#0c2845"), 
-                ('color', 'white'), 
-                ('text-align', 'center'), 
-                ('font-size', '13px') 
-                ]} 
-            ])
-        .set_properties(
-            subset=pd.IndexSlice[:, stats.columns[0]],**{
-                'background-color': '#012030',
-                'font-weight': 'bold',
-                'color': '#FFFFFF'
-        })
-            
-        ) 
-    
-    return styled
-#----------------------------------------------------------------------------------------------
 # Gráfico dados ausentes
 def plot_missing_values(df):
     """
@@ -189,9 +128,9 @@ def plot_missing_values(df):
 
     plt.show()
 #----------------------------------------------------------------------------------------
-def plot_proportion_bar(df, column):
+def plot_proportion_bar(df, columns, palette):
     """
-    Plota um gráfico de barras com a proporção percentual de uma variável categórica.
+    Plota gráficos de barras com o percentual de uma variável categórica.
 
     Parâmetros
     ----------
@@ -204,37 +143,43 @@ def plot_proportion_bar(df, column):
     pd.Series
         Série com as proporções (%) por categoria.
     """
-    palette = ["#008F8C" ,"#015958", "#023535", "#4C5958", "#BFBFBF", "#D92525"]
+    if isinstance(columns, str):
+            columns = [columns]
     
-    # Cálculo da proporção
-    proportions = df[column].value_counts(normalize=True) * 100
+    n = len(columns)
 
-    # Plot
-    plt.figure(figsize=(10, 5))
-    plt.style.use('ggplot')
-    plt.bar(
-        proportions.index.astype(str),
-        proportions.values,
-        color=palette[:len(proportions)]
-    )
+    fig, axes = plt.subplots(1, n, figsize=(17, 5))
 
-    plt.title(f"Proporção do {column} (%)", fontsize=14, fontweight='bold')
-    plt.ylabel("Proporção (%)", fontsize=14)
+    if n == 1:
+        axes = [axes]
 
-    plt.grid(axis='y', linestyle='--', alpha=0.6)
-    plt.tight_layout()
+    for ax, column in zip(axes, columns):
 
-    # Valores acima das barras
-    for i, valor in enumerate(proportions.values):
-        plt.text(
-            i,
-            valor + 0.1,
-            f'{valor:.2f}%',
-            ha='center',
-            fontsize=10,
-            fontweight='bold'
+        proportions = df[column].value_counts(normalize=True) * 100
+
+        ax.bar(
+            proportions.index.astype(str),
+            proportions.values,
+            color=palette[:len(proportions)]
         )
 
+        ax.set_title(f"Proporção do {column} (%)",fontsize=14,fontweight='bold')
+
+        ax.set_ylabel("Proporção (%)", fontsize=14)
+
+        ax.grid(axis='y',linestyle='--',alpha=0.6)
+
+        for i, valor in enumerate(proportions.values):
+            ax.text(
+                i,
+                valor + 0.1,
+                f'{valor:.2f}%',
+                ha='center',
+                fontsize=10,
+                fontweight='bold'
+            )
+
+    plt.tight_layout()
     plt.show()
 #---------------------------------------------------------------------------------
 def plot_mean_and_distribution(df, coluna1, coluna2):
