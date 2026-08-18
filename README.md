@@ -1,25 +1,33 @@
-![Badge-Concluido](https://img.shields.io/badge/Status-Conluído-green) ![Bagde-Version](https://img.shields.io/badge/Version-3.0-blue)
+![Badge-Concluido](https://img.shields.io/badge/Status-Em_Andamento-orange) ![Bagde-Version](https://img.shields.io/badge/Version-4.0-blue)
 
 # Modelo Preditivo para Inadimplência
 ## Introdução
-Imagine que você trabalhe em uma empresa de consultoria especializada em soluções de dados e inteligência de crédito. Atuando com grandes instituições financeiras, desenvolvendo modelos preditivos, sistema de apoio à decisão e estratégias baseadas em dados. Você foi alocado em um projeto que envolve o acompanhamento de transações financeiras realizadas por clientes ao longo do tempo.
+Este projeto simula um cenário de inteligência de crédito, no qual uma empresa de consultoria especializada em soluções de dados auxilia instituições financeiras na identificação antecipada de clientes com maior risco de inadimplência.
+
+O cenário envolve o acompanhamento mensal do comportamento financeiro dos clientes, considerando informações cadastrais, características econômicas e o histórico de pagamentos de suas cobranças.
+
+A partir desses dados, busca-se desenvolver uma solução de Machine Learning capaz de estimar a probabilidade de uma cobrança não ser paga dentro do prazo esperado.
 
 ## Objetivo Principal
+Em operações de crédito e cobrança, identificar clientes com maior risco de atraso antes do vencimento ou do agravamento da situação permite que a empresa adote estratégias proativas, como priorização de contatos e ações de cobrança direcionadas.
+
 Desenvolver um **modelo preditivo** capaz de estimar a probabilidade de inadimplência de cobranças mensais feitas aos clientes. Neste projeto a **inadimplência** é definida da seguinte forma:
 
 > [!IMPORTANT]
+> 
+> Neste projeto, um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
 >
-> Um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
-
-No final deste projeto os seguintes itens são esperados, um arquivo `.csv` chamado `resultado_final.csv`, contendo exatamente as seguintes colunas:
-- `ID_CLIENTE`
-- `SAFRA_REF`
-- `PROBABILIDADE_INADIMPLENCIA`
+> O resultado final será um arquivo `.csv` chamado `resultado_final.csv`, contendo exatamente as seguintes colunas:
+> - `ID_CLIENTE`
+> - `SAFRA_REF`
+> - `PROBABILIDADE_INADIMPLENCIA`
 
 ## Detalhes dos Dataset
-Existem *quatro bases de dados* na pasta `data` com informações sobre os clientes, o comportamento mensal e os registros de pagamentos. Essas bases foram extraídas de um sistema de cobrança e representam um cenário realista de operação. As tabelas se relacionam principalmente por duas chaves:
+Existem *quatro bases de dados* na pasta `data-raw` com informações sobre os clientes, o comportamento mensal e os registros de pagamentos. Essas bases foram extraídas de um sistema de cobrança e representam um cenário realista de operação. As tabelas se relacionam principalmente por duas chaves:
 - **ID_CLIENTE**: identifica cada cliente de forma única
 - **SAFRA_REF**: representa o período de referência da cobrança 
+
+![diagrama](img/esquema_bd_projeto.png)
 
 A estrutura  de cada base é a seguinte:
 - `base_cadastral.csv`: reúne informações cadastrais dos clientes, como data de cadastro, porte da empresa, CEP e domínio do e-mail. Cada linha representa um cliente único (ID_CLIENTE).
@@ -28,7 +36,19 @@ A estrutura  de cada base é a seguinte:
 - `base_pagamentos_teste.csv`: contém as cobranças mais recentes, para as quais o modelo deve prever a probabilidade de inadimplência. Cada linha representa uma cobrança mensal, sem a informação de pagamento.
 
 ## Estrutura do Projeto
-A estratégia utilizada neste estudo de cado foi dividir o desafio em **dois arquivos .ipynb**, cada um abordando uma etapa:
+A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, cada um abordando uma etapa:
+
+- Análise exploratória dos dados;
+- Tratamento e preparação das bases;
+- Integração das diferentes fontes de dados;
+- Engenharia de atributos;
+- Construção da variável-alvo;
+- Treinamento de modelos de classificação;
+- Validação e comparação dos modelos;
+- Avaliação das métricas de desempenho;
+- Geração de probabilidades de inadimplência para novas cobranças.
+
+
 1. **PARTE I**: Manipulação do dataset com o objetivo de tratar valores ausentes para viabilizar a análise exploratória dos dados e observação de insigths pela variável Churned. O processo foi conduzido da seguinte forma:
 - Identificação e contabilização dos dados ausentes;
 - Definição de estratégias para imputação dos valores faltantes, incluindo:
@@ -39,7 +59,7 @@ A estratégia utilizada neste estudo de cado foi dividir o desafio em **dois arq
     - Identificação de padrões, tendências e relações entre as variáveis;
     - Análise da variável target.
 
-> O código-fonte está disponível em: [PARTE I.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/PARTE%20I.ipynb)
+> O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/01-data_cleaning-eda.ipynb)
 
 2. **PARTE II**: Desenvolvimento e avaliação dos modelos de Machine Learning com foco na previsão da inadimplência. Nesta etapa foram realizadas: 
 - Engenharia de features a partir de variáveis temporais, com o tratamento e a extração de informações relevantes das colunas de data.  
@@ -54,8 +74,6 @@ A estratégia utilizada neste estudo de cado foi dividir o desafio em **dois arq
 
 ## Resultados
 O ínicio dete estudo de caso se deu tratando os valores ausentes do dataset, sendo identificado que algumas features apresentavam dados faltantes.
-
-![grafico_dados_ausentes](img/dados_ausentes.png)
 
 Para lidar com essas inconsistências, foram aplicadas diferentes **estratégias de imputação**, como o uso de média, mediana e técnicas baseadas em groupby com outras variáveis, buscando preservar ao máximo a coerência dos dados.
 

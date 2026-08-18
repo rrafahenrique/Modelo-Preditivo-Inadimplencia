@@ -148,7 +148,7 @@ def plot_proportion_bar(df, columns, palette):
     
     n = len(columns)
 
-    fig, axes = plt.subplots(1, n, figsize=(17, 5))
+    fig, axes = plt.subplots(1, n, figsize=(6*n, 5))
 
     if n == 1:
         axes = [axes]
@@ -254,7 +254,7 @@ def plot_segmento_por_porte(df):
     
     # Agrupamento e cálculo percentual
     porte_por_seg = (df.groupby("PORTE")["SEGMENTO_INDUSTRIAL"].value_counts(normalize=True).mul(100))
-    palette = ["#023535", "#4C5958", "#BFBFBF"]
+    palette = ["#008F8C" ,"#015958", "#023535",]
 
     df_plot = porte_por_seg.unstack() # Converte MultiIndex para tabela
 
@@ -303,7 +303,7 @@ def plot_segmento_por_porte(df):
 
     plt.show()
     #----------------------------------------------------------------------------------
-def plot_pag(df):
+def plot_pagamento(df):
     """
     Plota lado a lado:
     1) Gráfico de barras com a média do dia de pagamento
@@ -457,7 +457,6 @@ def plot_churned(df):
             va='bottom',
             fontsize=9
         )
-
 
     plt.tight_layout()
     plt.show()
