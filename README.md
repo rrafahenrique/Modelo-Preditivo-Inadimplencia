@@ -15,14 +15,14 @@ Desenvolver um **modelo preditivo** capaz de estimar a probabilidade de inadimpl
 
 > [!IMPORTANT]
 > 
-> Neste projeto, um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
+> 🚨 Neste projeto, um pagamento é considerado inadimplente se for realizado com **5 dias ou mais de atraso** em relação à data de vencimento. As previsões devem conter apenas a probabilidade de inadimplência (valores entre 0 e 1).
 >
 > O resultado final será um arquivo `.csv` chamado `resultado_final.csv`, contendo exatamente as seguintes colunas:
 > - `ID_CLIENTE`
 > - `SAFRA_REF`
 > - `PROBABILIDADE_INADIMPLENCIA`
 
-## Detalhes dos Dataset
+## Detalhes dos Dataset 📝
 Existem *quatro bases de dados* na pasta `data-raw` com informações sobre os clientes, o comportamento mensal e os registros de pagamentos. Essas bases foram extraídas de um sistema de cobrança e representam um cenário realista de operação. As tabelas se relacionam principalmente por duas chaves:
 - **ID_CLIENTE**: identifica cada cliente de forma única
 - **SAFRA_REF**: representa o período de referência da cobrança 
@@ -49,7 +49,7 @@ A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, c
 - Geração de probabilidades de inadimplência para novas cobranças.
 
 
-1. **PARTE I**: Manipulação do dataset com o objetivo de tratar valores ausentes para viabilizar a análise exploratória dos dados e observação de insigths pela variável Churned. O processo foi conduzido da seguinte forma:
+1️⃣ **PARTE I**: Manipulação do dataset com o objetivo de tratar valores ausentes para viabilizar a análise exploratória dos dados e observação de insigths pela variável Churned. O processo foi conduzido da seguinte forma:
 - Identificação e contabilização dos dados ausentes;
 - Definição de estratégias para imputação dos valores faltantes, incluindo:
     - Uso da mediana;
@@ -61,7 +61,7 @@ A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, c
 
 > O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/01-data_cleaning-eda.ipynb)
 
-2. **PARTE II**: Desenvolvimento e avaliação dos modelos de Machine Learning com foco na previsão da inadimplência. Nesta etapa foram realizadas: 
+2️⃣ **PARTE II**: Desenvolvimento e avaliação dos modelos de Machine Learning com foco na previsão da inadimplência. Nesta etapa foram realizadas: 
 - Engenharia de features a partir de variáveis temporais, com o tratamento e a extração de informações relevantes das colunas de data.  
 - Foram utilizados e comparados os seguintes algoritmos:
     - Regressão Logística;
@@ -70,7 +70,7 @@ A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, c
     - K-Nearest Neighbors (KNN);
     - LightGBM.
 
-> O código-fonte está disponível em: [PARTE II.ipynb](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/PARTE%20II.ipynb) 
+> O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/02-model_analysis.ipynb) 
 
 ## Resultados
 O ínicio dete estudo de caso se deu tratando os valores ausentes do dataset, sendo identificado que algumas features apresentavam dados faltantes.
