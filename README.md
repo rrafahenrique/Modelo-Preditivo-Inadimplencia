@@ -1,4 +1,4 @@
-![Badge-Concluido](https://img.shields.io/badge/Status-Em_Andamento-orange) ![Bagde-Version](https://img.shields.io/badge/Version-4.0-blue)
+![Badge-Concluido](https://img.shields.io/badge/Status-Concluído-gren) ![Bagde-Version](https://img.shields.io/badge/Version-4.0-blue)
 
 # Modelo Preditivo para Inadimplência
 ## Introdução
@@ -72,10 +72,13 @@ A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, c
 
 > O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/02-model_analysis.ipynb) 
 
-## Resultados
-O ínicio dete estudo de caso se deu tratando os valores ausentes do dataset, sendo identificado que algumas features apresentavam dados faltantes.
+## Resultados 📉
+O ínicio deste projeto se deu tratando os valores ausentes do dataset, buscando identificar features que apresentavam missing values. Para lidar com essas inconsistências, foram aplicadas diferentes **estratégias de imputação**, como o uso:
+- média, 
+- mediana e 
+- técnicas baseadas em groupby com outras variáveis, 
 
-Para lidar com essas inconsistências, foram aplicadas diferentes **estratégias de imputação**, como o uso de média, mediana e técnicas baseadas em groupby com outras variáveis, buscando preservar ao máximo a coerência dos dados.
+buscando preservar ao máximo a coerência e consistência dos dados.
 
 Após o tratamento, foi realizada uma **análise exploratória**, com foco na distribuição, quantidade e proporção das variáveis, utilizando visualizações gráficas para facilitar a interpretação.
 
@@ -83,7 +86,7 @@ Além disso, foi conduzida uma **análise detalhada da variável target**, com o
 
 ![graficos_churned](img/dados_churned.png)
 
-Para facilitar o fluxo de trabalho na pasta `docs`  foram são dataset já limpos sem dados faltantes para serem utilizados na `PARTE II.ipynb`.
+Para facilitar o fluxo de trabalho na pasta `data-processed` estão localizados os dados limpos, transformados e prontos para uso.
 
 A próxima etapa consistiu em preparar o **dataset de treino e teste** para a modelagem com algoritmos de Machine Learning. Foram criadas features temporais e o tratamento do **desbalanceamento da variável target**, utilizando técnicas de **Oversampling**  e **Undersampling**.
 
