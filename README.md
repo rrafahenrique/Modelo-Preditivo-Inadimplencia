@@ -38,17 +38,6 @@ A estrutura  de cada base é a seguinte:
 ## Estrutura do Projeto
 A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, cada um abordando uma etapa:
 
-- Análise exploratória dos dados;
-- Tratamento e preparação das bases;
-- Integração das diferentes fontes de dados;
-- Engenharia de atributos;
-- Construção da variável-alvo;
-- Treinamento de modelos de classificação;
-- Validação e comparação dos modelos;
-- Avaliação das métricas de desempenho;
-- Geração de probabilidades de inadimplência para novas cobranças.
-
-
 1️⃣ **PARTE I**: Manipulação do dataset com o objetivo de tratar valores ausentes para viabilizar a análise exploratória dos dados e observação de insigths pela variável Churned. O processo foi conduzido da seguinte forma:
 - Identificação e contabilização dos dados ausentes;
 - Definição de estratégias para imputação dos valores faltantes, incluindo:
@@ -62,13 +51,15 @@ A estratégia utilizada neste projeto foi dividir em **dois arquivos .ipynb**, c
 > O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/01-data_cleaning-eda.ipynb)
 
 2️⃣ **PARTE II**: Desenvolvimento e avaliação dos modelos de Machine Learning com foco na previsão da inadimplência. Nesta etapa foram realizadas: 
-- Engenharia de features a partir de variáveis temporais, com o tratamento e a extração de informações relevantes das colunas de data.  
-- Foram utilizados e comparados os seguintes algoritmos:
+- Treinamento de modelos de classificação;
+- Validação e comparação dos modelos:
     - Regressão Logística;
     - Random Forest;
     - Árvore de Decisão;
     - K-Nearest Neighbors (KNN);
     - LightGBM.
+- Avaliação das métricas de desempenho;
+- Geração de probabilidades de inadimplência para novas cobranças.
 
 > O código-fonte está disponível em: [link](https://github.com/rrafahenrique/Modelo-Preditivo-Inadimplencia/blob/main/notebooks/02-model_analysis.ipynb) 
 
