@@ -87,5 +87,11 @@ No final foram obtidos e comparados os resultados de cada algoritmo de Machine L
 
 ![tabela_resultado](img/resultado_tabela.png)
 
-Após aplicar a técnica de Undersampling, observou-se que os modelos de **Árvore de Decisão** e **Floresta Randômica** apresentaram os melhores desempenhos. No entanto, a Floresta Randômica demonstrou maior estabilidade e equilíbrio entre as métricas, destacando-se por uma **Accuracy** elevada, além de **Precision, F1-Score** e **ROC-AUC** superiores em comparação à Árvore de Decisão.
+Após aplicar a técnica de Undersampling, observou-se que os modelos de **Árvore de Decisão** e **Floresta Randômica** apresentaram os melhores desempenhos. No entanto, a Floresta Randômica apresentou um desempenho bastante elevado na previsão de inadimplência.
+
+No conjunto de teste, composto majoritariamente por clientes da classe 0 (93%) e por aproximadamente 7% de clientes inadimplentes, o **modelo alcançou 99,4% de acurácia**. Entretanto, devido ao desbalanceamento da variável-alvo, a acurácia isoladamente não é suficiente para avaliar o desempenho do modelo.
+
+Para a classe de interesse, representada pelos clientes inadimplentes, o modelo apresentou **Precision de aproximadamente 95%**, indicando que, entre os clientes classificados como inadimplentes, cerca de 95% realmente pertenciam a essa classe. O **Recall de aproximadamente 96%** demonstra que o modelo conseguiu identificar cerca de 96% dos inadimplentes presentes no conjunto de teste, deixando de identificar apenas 40 dos 1.081 casos reais. O **F1-score de 96%** reforça o equilíbrio entre Precision e Recall.
+
+A matriz de confusão mostra ainda uma baixa quantidade de erros, com 50 falsos positivos e 40 falsos negativos. O ROC-AUC de 0,998 indica uma capacidade de discriminação extremamente elevada entre clientes inadimplentes e não inadimplentes.
 
